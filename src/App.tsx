@@ -59,42 +59,49 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen">
-      <header className="bg-white shadow">
-        <div className="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-          <h1 className="text-3xl font-bold text-gray-900">Parcel Management</h1>
-        </div>
-      </header>
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 p-4 md:p-6">
+      <div className="max-w-7xl mx-auto">
+        <header className="bg-white/80 backdrop-blur-sm rounded-xl shadow-md p-6 mb-6 md:mb-8 border border-white/50">
+          <h1 className="text-2xl md:text-3xl font-bold text-gray-800">📦 Parcel Management</h1>
+          <p className="text-gray-600 mt-1">Manage your parcels with ease</p>
+        </header>
 
-      <main className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
-        <div className="px-4 py-6 sm:px-0">
+        <main className="space-y-6">
           {!isAdding ? (
-            <>
-              <div className="flex justify-end mb-6">
-                <button
-                  onClick={handleAdd}
-                  className="px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                >
-                  Add New Parcel
-                </button>
+            <div className="bg-white/80 backdrop-blur-sm rounded-xl shadow-md overflow-hidden border border-white/50">
+              <div className="p-4 md:p-6">
+                <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6">
+                  <h2 className="text-xl font-semibold text-gray-800">Your Parcels</h2>
+                  <button
+                    onClick={handleAdd}
+                    className="w-full sm:w-auto px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white font-medium rounded-lg transition-colors duration-200 shadow-sm hover:shadow-md flex items-center justify-center"
+                  >
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                      <path fillRule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clipRule="evenodd" />
+                    </svg>
+                    Add New Parcel
+                  </button>
+                </div>
+                <ParcelList
+                  parcels={parcels}
+                  onEdit={handleEdit}
+                  onDelete={handleDelete}
+                />
               </div>
-              <ParcelList
-                parcels={parcels}
-                onEdit={handleEdit}
-                onDelete={handleDelete}
-              />
-            </>
+            </div>
           ) : (
-            <div className="max-w-3xl mx-auto">
-              <ParcelForm
-                initialData={editingParcel}
-                onSubmit={handleSubmit}
-                onCancel={handleCancel}
-              />
+            <div className="bg-white/80 backdrop-blur-sm rounded-xl shadow-lg overflow-hidden max-w-4xl mx-auto border border-white/50">
+              <div className="p-6">
+                <ParcelForm
+                  initialData={editingParcel}
+                  onSubmit={handleSubmit}
+                  onCancel={handleCancel}
+                />
+              </div>
             </div>
           )}
-        </div>
-      </main>
+        </main>
+      </div>
     </div>
   );
 }
